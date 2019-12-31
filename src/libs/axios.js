@@ -38,8 +38,8 @@ class HttpRequest {
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
       if (url !== 'login') {
-        console.log(store.state.user.token)
-        instance.defaults.headers.common['Authorization'] = 'Bearer ' + store.state.user.token
+        // console.log(store.state.user.token)
+        instance.defaults.headers.common['token'] = store.state.user.token
       }
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好

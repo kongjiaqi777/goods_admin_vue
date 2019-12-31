@@ -51,6 +51,25 @@ export default [
     ]
   },
   {
+    path: '/goods',
+    name: 'goods',
+    component: Main,
+    meta: {
+      hideInBread: true
+    },
+    children: [
+      {
+        path: 'goods',
+        name: 'goods',
+        meta: {
+          icon: 'md-home',
+          title: '商品列表'
+        },
+        component: () => import('@/view/kong/goods_info.vue')
+      }
+    ]
+  },
+  {
     path: '',
     name: 'doc',
     meta: {

@@ -83,7 +83,7 @@ export default {
         }).then(res => {
           const data = res.data
           if (data.code === 0) {
-            commit('setToken', data.info.token)
+            commit('setToken', data.info)
             resolve()
           } else {
             reject(data.msg)
@@ -114,16 +114,16 @@ export default {
       return new Promise((resolve, reject) => {
         try {
           getUserInfo(state.token).then(res => {
-            const data = res.data
-            if (data.code === 0) {
+            if (res.data.code === 0) {
+              const data = res.data.info
               commit('setAvator', data.avator)
               commit('setUserName', data.name)
-              commit('setUserId', data.user_id)
+              commit('setUserId', data.id)
               commit('setAccess', data.access)
               commit('setHasGetInfo', true)
               resolve(data)
             } else {
-              reject(data.msg)
+              reject(res.data.msg)
             }
           }).catch(err => {
             reject(err)
