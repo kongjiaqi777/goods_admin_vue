@@ -174,6 +174,7 @@ export default {
                   },
                   on: {
                     click: () => {
+                      console.log(params)
                       this.clickEditRow(params)
                     }
                   }
@@ -360,7 +361,7 @@ export default {
       this.addGoodsForm.id = params.row.id
       this.addGoodsForm.purchase_price = util.montyFormatterOutput(params.row.purchase_price)
       this.addGoodsForm.voltage = params.row.voltage
-      this.addGoodsForm.unit_id = params.row.unit_id
+      this.addGoodsForm.unit_id = Number(params.row.unit_id)
       this.addGoodsForm.unit_type = params.row.unit_type
     },
     // 点击页码

@@ -1,4 +1,165 @@
 import Main from '@/components/main'
+
+// export default [
+//   {
+//     path: '/login',
+//     name: 'login',
+//     meta: {
+//       title: 'Login - 登录',
+//       hideInMenu: true
+//     },
+//     component: () => import('@/view/login/login.vue')
+//   },
+//   {
+//     path: '/home',
+//     name: '_home',
+//     component: Main,
+//     redirect: '/home',
+//     meta: {
+//       title: '商品列表',
+//       icon: 'md-apps'
+//     },
+//     children: [
+//       {
+//         path: '/home',
+//         name: '销售商品列表',
+//         meta: {
+//           title: 'goods',
+//           icon: 'md-car'
+//         },
+//         component: () => import('@/view/kong/goods_info')
+//       },
+//       {
+//         path: '/home/old',
+//         name: '旧物商品列表',
+//         meta: {
+//           title: 'old',
+//           icon: 'md-basket'
+//         },
+//         component: () => import('@/view/kong/old_goods')
+//       }
+//     ]
+//   },
+//   {
+//     path: '/purchase_order',
+//     name: '订单管理',
+//     component: Main,
+//     meta: {
+//       title: 'asyncOK',
+//       icon: 'md-lock'
+//     },
+//     children: [
+//       {
+//         path: '/sales_order',
+//         name: '销售订单',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-magnet'
+//         },
+//         component: () => import('@/view/kong/sales_order')
+//       },
+//       {
+//         path: '/purchase_order',
+//         name: '采购订单',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-list'
+//         },
+//         component: () => import('@/view/kong/purchase_order')
+//       }
+//     ]
+//   },
+//   {
+//     path: '/customer_list',
+//     name: '顾客管理',
+//     component: Main,
+//     meta: {
+//       title: 'asyncOK',
+//       icon: 'md-contacts'
+//     },
+//     children: [
+//       {
+//         path: '/customer_list',
+//         name: '顾客管理',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-contacts'
+//         },
+//         component: () => import('@/view/kong/customer_list')
+//       }
+//     ]
+//   },
+//   {
+//     path: '/supplier_list',
+//     name: '供应商管理',
+//     component: Main,
+//     meta: {
+//       title: 'asyncOK',
+//       icon: 'md-cart'
+//     },
+//     children: [
+//       {
+//         path: '/supplier_list',
+//         name: '供应商管理',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-cart'
+//         },
+//         component: () => import('@/view/kong/supplier_list')
+//       }
+//     ]
+//   },
+//   {
+//     path: '/payment_list',
+//     name: '还款记录',
+//     component: Main,
+//     meta: {
+//       title: 'asyncOK',
+//       icon: 'md-calculator'
+//     },
+//     children: [
+//       {
+//         path: '/payment_list',
+//         name: '还款记录',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-calculator'
+//         },
+//         component: () => import('@/view/kong/payment_list')
+//       }
+//     ]
+//   },
+//   {
+//     path: '/manage',
+//     name: '配置管理',
+//     component: Main,
+//     meta: {
+//       title: 'asyncOK',
+//       icon: 'md-build'
+//     },
+//     children: [
+//       {
+//         path: '/category_list',
+//         name: '类别列表',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-cog'
+//         },
+//         component: () => import('@/view/kong/category_list')
+//       },
+//       {
+//         path: '/unitList',
+//         name: '单位管理',
+//         meta: {
+//           title: 'asyncOK',
+//           icon: 'md-cube'
+//         },
+//         component: () => import('@/view/kong/unitList')
+//       }
+//     ]
+//   }
+// ]
+
 import parentView from '@/components/parent-view'
 
 /**
@@ -46,26 +207,7 @@ export default [
           notCache: true,
           icon: 'md-home'
         },
-        component: () => import('@/view/single-page/home')
-      }
-    ]
-  },
-  {
-    path: '/goods',
-    name: 'goods',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'goods',
-        name: 'goods',
-        meta: {
-          icon: 'md-home',
-          title: '商品列表'
-        },
-        component: () => import('@/view/kong/goods_info.vue')
+        component: () => import('@/view/kong/goods_info')
       }
     ]
   },

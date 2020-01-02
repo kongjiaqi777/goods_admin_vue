@@ -22,7 +22,7 @@ const turnTo = (to, access, next) => {
 router.beforeEach((to, from, next) => {
   iView.LoadingBar.start()
   const token = getToken()
-  // console.log(token)
+
   if (!token && to.name !== LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面不是登录页
     next({
@@ -38,11 +38,16 @@ router.beforeEach((to, from, next) => {
     })
   } else {
     if (store.state.user.hasGetInfo) {
-      turnTo(to, store.state.user.access, next)
+      next()
+      // turnTo(to, store.state.user.access, next)
     } else {
+      console.log(store.state.user.token)
+      console.log(token)
       store.dispatch('getUserInfo').then(user => {
         // 拉取用户信息，通过用户权限和跳转的页面的name来判断是否有权限访问;access必须是一个数组，如：['super_admin'] ['super_admin', 'admin']
-        turnTo(to, user.access, next)
+        next({
+          name: 'home'
+        })
       }).catch(() => {
         setToken('')
         next({
