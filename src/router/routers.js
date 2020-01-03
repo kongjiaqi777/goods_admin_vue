@@ -1,165 +1,4 @@
 import Main from '@/components/main'
-
-// export default [
-//   {
-//     path: '/login',
-//     name: 'login',
-//     meta: {
-//       title: 'Login - 登录',
-//       hideInMenu: true
-//     },
-//     component: () => import('@/view/login/login.vue')
-//   },
-//   {
-//     path: '/home',
-//     name: '_home',
-//     component: Main,
-//     redirect: '/home',
-//     meta: {
-//       title: '商品列表',
-//       icon: 'md-apps'
-//     },
-//     children: [
-//       {
-//         path: '/home',
-//         name: '销售商品列表',
-//         meta: {
-//           title: 'goods',
-//           icon: 'md-car'
-//         },
-//         component: () => import('@/view/kong/goods_info')
-//       },
-//       {
-//         path: '/home/old',
-//         name: '旧物商品列表',
-//         meta: {
-//           title: 'old',
-//           icon: 'md-basket'
-//         },
-//         component: () => import('@/view/kong/old_goods')
-//       }
-//     ]
-//   },
-//   {
-//     path: '/purchase_order',
-//     name: '订单管理',
-//     component: Main,
-//     meta: {
-//       title: 'asyncOK',
-//       icon: 'md-lock'
-//     },
-//     children: [
-//       {
-//         path: '/sales_order',
-//         name: '销售订单',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-magnet'
-//         },
-//         component: () => import('@/view/kong/sales_order')
-//       },
-//       {
-//         path: '/purchase_order',
-//         name: '采购订单',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-list'
-//         },
-//         component: () => import('@/view/kong/purchase_order')
-//       }
-//     ]
-//   },
-//   {
-//     path: '/customer_list',
-//     name: '顾客管理',
-//     component: Main,
-//     meta: {
-//       title: 'asyncOK',
-//       icon: 'md-contacts'
-//     },
-//     children: [
-//       {
-//         path: '/customer_list',
-//         name: '顾客管理',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-contacts'
-//         },
-//         component: () => import('@/view/kong/customer_list')
-//       }
-//     ]
-//   },
-//   {
-//     path: '/supplier_list',
-//     name: '供应商管理',
-//     component: Main,
-//     meta: {
-//       title: 'asyncOK',
-//       icon: 'md-cart'
-//     },
-//     children: [
-//       {
-//         path: '/supplier_list',
-//         name: '供应商管理',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-cart'
-//         },
-//         component: () => import('@/view/kong/supplier_list')
-//       }
-//     ]
-//   },
-//   {
-//     path: '/payment_list',
-//     name: '还款记录',
-//     component: Main,
-//     meta: {
-//       title: 'asyncOK',
-//       icon: 'md-calculator'
-//     },
-//     children: [
-//       {
-//         path: '/payment_list',
-//         name: '还款记录',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-calculator'
-//         },
-//         component: () => import('@/view/kong/payment_list')
-//       }
-//     ]
-//   },
-//   {
-//     path: '/manage',
-//     name: '配置管理',
-//     component: Main,
-//     meta: {
-//       title: 'asyncOK',
-//       icon: 'md-build'
-//     },
-//     children: [
-//       {
-//         path: '/category_list',
-//         name: '类别列表',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-cog'
-//         },
-//         component: () => import('@/view/kong/category_list')
-//       },
-//       {
-//         path: '/unitList',
-//         name: '单位管理',
-//         meta: {
-//           title: 'asyncOK',
-//           icon: 'md-cube'
-//         },
-//         component: () => import('@/view/kong/unitList')
-//       }
-//     ]
-//   }
-// ]
-
 import parentView from '@/components/parent-view'
 
 /**
@@ -194,20 +33,144 @@ export default [
     redirect: '/home',
     component: Main,
     meta: {
-      hideInMenu: true,
-      notCache: true
+      title: '商品管理',
+      icon: 'md-home'
     },
     children: [
       {
         path: '/home',
         name: 'home',
         meta: {
-          hideInMenu: true,
-          title: '首页',
-          notCache: true,
+          title: '商品列表',
           icon: 'md-home'
         },
         component: () => import('@/view/kong/goods_info')
+      },
+      {
+        path: '/old_goods',
+        name: 'old_goods',
+        meta: {
+          title: '旧物列表',
+          icon: 'md-home'
+        },
+        component: () => import('@/view/kong/old_goods')
+      }
+    ]
+  },
+  {
+    path: '/purchase_order',
+    name: 'purchase_order',
+    component: Main,
+    meta: {
+      title: '订单管理',
+      icon: 'md-lock'
+    },
+    children: [
+      {
+        path: '/sales_order',
+        name: 'sales_order',
+        meta: {
+          title: '销售订单',
+          icon: 'md-magnet'
+        },
+        component: () => import('@/view/kong/sales_order')
+      },
+      {
+        path: '/purchase_order',
+        name: 'purchase_order',
+        meta: {
+          title: '采购订单',
+          icon: 'md-list',
+          hideInBread: true
+        },
+        component: () => import('@/view/kong/purchase_order')
+      }
+    ]
+  },
+  {
+    path: '/customer_list',
+    name: 'customer_list',
+    component: Main,
+    meta: {
+      icon: 'md-contacts'
+    },
+    children: [
+      {
+        path: '/customer_list',
+        name: 'customer_list',
+        meta: {
+          title: '顾客管理',
+          icon: 'md-contacts'
+        },
+        component: () => import('@/view/kong/customer_list')
+      }
+    ]
+  },
+  {
+    path: '/supplier_list',
+    name: 'supplier_list',
+    component: Main,
+    meta: {
+      icon: 'md-cart'
+    },
+    children: [
+      {
+        path: '/supplier_list',
+        name: 'supplier_list',
+        meta: {
+          title: '供应商管理',
+          icon: 'md-cart'
+        },
+        component: () => import('@/view/kong/supplier_list')
+      }
+    ]
+  },
+  {
+    path: '/payment_list',
+    name: '还款记录',
+    component: Main,
+    meta: {
+      title: '还款记录',
+      icon: 'md-calculator'
+    },
+    children: [
+      {
+        path: '/payment_list',
+        name: 'payment_list',
+        meta: {
+          title: '还款记录',
+          icon: 'md-calculator'
+        },
+        component: () => import('@/view/kong/payment_list')
+      }
+    ]
+  },
+  {
+    path: '/manage',
+    name: 'manage',
+    component: Main,
+    meta: {
+      title: '系统配置',
+      icon: 'md-build'
+    },
+    children: [
+      {
+        path: '/category_list',
+        name: 'category_list',
+        meta: {
+          title: '类别列表',
+          icon: 'md-cog'
+        },
+        component: () => import('@/view/kong/category_list')
+      },
+      {
+        path: '/unitList',
+        name: 'unitList',
+        meta: {
+          title: '单位管理',
+          icon: 'md-cube'
+        },
+        component: () => import('@/view/kong/unitList')
       }
     ]
   },
@@ -217,7 +180,9 @@ export default [
     meta: {
       title: '文档',
       href: 'https://lison16.github.io/iview-admin-doc/#/',
-      icon: 'ios-book'
+      icon: 'ios-book',
+      hideInMenu: true,
+      hideInBread: true
     }
   },
   {
@@ -225,6 +190,7 @@ export default [
     name: 'join',
     component: Main,
     meta: {
+      hideInMenu: true,
       hideInBread: true
     },
     children: [
@@ -264,7 +230,9 @@ export default [
     name: 'components',
     meta: {
       icon: 'logo-buffer',
-      title: '组件'
+      title: '组件',
+      hideInMenu: true,
+      hideInBread: true
     },
     component: Main,
     children: [
@@ -383,7 +351,9 @@ export default [
     name: 'update',
     meta: {
       icon: 'md-cloud-upload',
-      title: '数据上传'
+      title: '数据上传',
+      hideInMenu: true,
+      hideInBread: true
     },
     component: Main,
     children: [
@@ -412,7 +382,9 @@ export default [
     name: 'excel',
     meta: {
       icon: 'ios-stats',
-      title: 'EXCEL导入导出'
+      title: 'EXCEL导入导出',
+      hideInMenu: true,
+      hideInBread: true
     },
     component: Main,
     children: [
@@ -440,6 +412,7 @@ export default [
     path: '/tools_methods',
     name: 'tools_methods',
     meta: {
+      hideInMenu: true,
       hideInBread: true
     },
     component: Main,
@@ -460,6 +433,7 @@ export default [
     path: '/i18n',
     name: 'i18n',
     meta: {
+      hideInMenu: true,
       hideInBread: true
     },
     component: Main,
@@ -479,6 +453,7 @@ export default [
     path: '/error_store',
     name: 'error_store',
     meta: {
+      hideInMenu: true,
       hideInBread: true
     },
     component: Main,
@@ -518,6 +493,7 @@ export default [
     path: '/directive',
     name: 'directive',
     meta: {
+      hideInMenu: true,
       hideInBread: true
     },
     component: Main,
@@ -538,7 +514,9 @@ export default [
     name: 'multilevel',
     meta: {
       icon: 'md-menu',
-      title: '多级菜单'
+      title: '多级菜单',
+      hideInMenu: true,
+      hideInBread: true
     },
     component: Main,
     children: [
@@ -597,7 +575,8 @@ export default [
     path: '/argu',
     name: 'argu',
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
+      hideInBread: true
     },
     component: Main,
     children: [
@@ -628,7 +607,8 @@ export default [
     path: '/401',
     name: 'error_401',
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
+      hideInBread: true
     },
     component: () => import('@/view/error-page/401.vue')
   },
@@ -636,7 +616,8 @@ export default [
     path: '/500',
     name: 'error_500',
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
+      hideInBread: true
     },
     component: () => import('@/view/error-page/500.vue')
   },
@@ -644,7 +625,8 @@ export default [
     path: '*',
     name: 'error_404',
     meta: {
-      hideInMenu: true
+      hideInMenu: true,
+      hideInBread: true
     },
     component: () => import('@/view/error-page/404.vue')
   }

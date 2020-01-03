@@ -37,7 +37,7 @@ class HttpRequest {
     // 请求拦截
     instance.interceptors.request.use(config => {
       // 添加全局的loading...
-      instance.defaults.headers.common['token'] = store.state.user.token
+      // instance.defaults.headers.common['token'] = store.state.user.token
 
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
@@ -70,6 +70,8 @@ class HttpRequest {
   request (options) {
     const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
+    instance.defaults.headers.common['token'] = store.state.user.token
+
     this.interceptors(instance, options.url)
     return instance(options)
   }

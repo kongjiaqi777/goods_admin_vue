@@ -78,10 +78,12 @@ export const suggestGoods = (info) => {
  * @params obj 需要过滤的对象
  */
 const parFilter = function (obj) {
-  Object.keys(obj).forEach(function (o) {
-    if (obj[o] === '' || obj[o] === undefined || obj[o] === null || obj[o] === 0) {
-      delete obj[o]
-    }
-  })
+  if (obj) {
+    Object.keys(obj).forEach(function (o) {
+      if (obj[o] === '' || obj[o] === undefined || obj[o] === null || obj[o] === 0) {
+        delete obj[o]
+      }
+    })
+  }
   return obj
 }

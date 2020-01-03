@@ -1,6 +1,21 @@
 <template>
   <div>
       <Card>
+        <i-form ref="orderParam" :model="orderParam" :label-width="70" inline>
+          <!-- 顾客姓名 -->
+          <Form-item prop="customer_id" label="顾客姓名">
+            <i-input type="text" v-model="orderParam.customer_name" placeholder="请输入顾客姓名"></i-input>
+          </Form-item>
+
+          <!-- 创建时间 -->
+          <Form-item prop="created_at" label="创建时间">
+            <Date-picker type="daterange" v-model="orderParam.created_at" placement="bottom-end" placeholder="选择日期" style="width: 200px"></Date-picker>
+          </Form-item>
+
+          <i-button @click="handleReset" size="default" style="float: right">重置</i-button>
+          <i-button @click="handleSelect" type="primary" size="default" style="margin:0 30px;float: right;">查询</i-button>
+        </i-form>
+      <Divider />
       <i-button type="primary" @click="addSalesOrderFunc">添加销售订单</i-button>
       <i-table :columns="columns" :data="tableData" style="margin-top: 30px;"></i-table>
       <Page
@@ -444,7 +459,9 @@ export default {
       // 订单列表筛选
       orderParam: {
         page: 1,
-        perpage: 10
+        perpage: 10,
+        customer_name: '',
+        created_at: ''
       },
       // 单位列表
       unitList: []
@@ -626,6 +643,17 @@ export default {
       unitSuggest().then(res => {
         this.unitList = res.data.info
       })
+    },
+    // 列表筛选
+    handleSelect () {
+      this.getSalesOrderList()
+    },
+    // 重置查询条件
+    handleReset () {
+      this.orderParam.page = 1
+      this.orderParam.perpage = 10
+      this.orderParam.customer_name = ''
+      this.orderParam.created_at = ''
     }
   }
 }

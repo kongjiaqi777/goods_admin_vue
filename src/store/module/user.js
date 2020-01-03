@@ -98,6 +98,7 @@ export default {
     handleLogOut ({ state, commit }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
+          console.log('logout')
           commit('setToken', '')
           commit('setAccess', [])
           resolve()

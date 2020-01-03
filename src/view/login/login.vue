@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'handleLogin',
+      'handleLogin'
       // 'getUserInfo'
     ]),
     handleSubmit ({ userName, password }) {
