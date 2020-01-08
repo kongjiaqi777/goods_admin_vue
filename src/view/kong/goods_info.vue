@@ -1,6 +1,7 @@
 <template>
   <div>
     <Card>
+        <!--search Form-->
         <i-form ref="goodsParam" :model="goodsParam" :label-width="70" inline>
           <!-- 商品类别 -->
           <Form-item prop="category_id" label="商品类别">
@@ -18,27 +19,27 @@
 
            <!-- 商品名称 -->
           <Form-item prop="name" label="商品名称(模糊查询)">
-            <i-input type="text" v-model="goodsParam.name" placeholder="请输入部分商品名称"></i-input>
+            <i-input type="text" v-model="goodsParam.name" placeholder="请输入部分商品名称" clearable></i-input>
           </Form-item>
 
           <Form-item prop="brand" label="品牌">
-            <i-input type="text" v-model="goodsParam.brand" placeholder="请输入部分商品品牌"></i-input>
+            <i-input type="text" v-model="goodsParam.brand" placeholder="请输入部分商品品牌" clearable></i-input>
           </Form-item>
           <i-button @click="handleReset" size="default" style="float: right">重置</i-button>
           <i-button @click="handleSelect" type="primary" size="default" style="margin:0 30px;float: right;">查询</i-button>
         </i-form>
       <Divider />
-      <i-button @click="handleAdd" type="primary" size="large">添加商品</i-button>
+      <Tooltip placement="right-start" max-width="200">
+        <i-button @click="handleAdd" type="primary" size="large">添加商品</i-button>
+        <div slot="content">
+            <p>点击此处添加商品，确保添加之前商品类别已经存在</p>
+            <p><i>商品名称最好具有唯一标示性</i></p>
+        </div>
+      </Tooltip>
+
       <i-table :columns="columns" :data="tableData" style="margin-top: 30px;"></i-table>
-      <Page
-      :total="totalCount"
-      :current="currentPage"
-      :page-size="pageSize"
-      style="margin-top: 50px;text-align: center;"
-      show-total
-      show-elevator
-      @on-change="changePage">
-      </Page>
+
+      <Page :total="totalCount" :current="currentPage" :page-size="pageSize" style="margin-top: 50px;text-align: center;" show-total show-elevator @on-change="changePage"></Page>
     </Card>
     <Modal v-model="showDetail" :title="modelTitle" @on-ok="goodsSubmit" @on-cancel="clearFormData">
       <i-form ref="goodsForm" :model="addGoodsForm" :rules="addGoodsRule" :label-width="80">

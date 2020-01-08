@@ -34,7 +34,9 @@ export default [
     component: Main,
     meta: {
       title: '商品管理',
-      icon: 'md-home'
+      icon: 'md-home',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {
@@ -63,7 +65,9 @@ export default [
     component: Main,
     meta: {
       title: '订单管理',
-      icon: 'md-lock'
+      icon: 'md-lock',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {
@@ -92,7 +96,9 @@ export default [
     name: 'customer_list',
     component: Main,
     meta: {
-      icon: 'md-contacts'
+      icon: 'md-contacts',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {
@@ -111,7 +117,9 @@ export default [
     name: 'supplier_list',
     component: Main,
     meta: {
-      icon: 'md-cart'
+      icon: 'md-cart',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {
@@ -131,7 +139,9 @@ export default [
     component: Main,
     meta: {
       title: '还款记录',
-      icon: 'md-calculator'
+      icon: 'md-calculator',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {
@@ -151,7 +161,9 @@ export default [
     component: Main,
     meta: {
       title: '系统配置',
-      icon: 'md-build'
+      icon: 'md-build',
+      hideInBread: true,
+      notCache: true
     },
     children: [
       {

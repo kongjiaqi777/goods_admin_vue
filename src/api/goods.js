@@ -3,7 +3,7 @@ import axios from '@/libs/api.request'
 // 商品列表
 export const getGoodsInfo = (data) => {
   return axios.request({
-    url: 'v1/goods/list',
+    url: 'goods/list',
     method: 'get',
     params: parFilter(data)
   })
@@ -12,7 +12,7 @@ export const getGoodsInfo = (data) => {
 // 添加商品
 export const addGoodsInfo = (info) => {
   return axios.request({
-    url: 'v1/goods/create',
+    url: 'goods/create',
     method: 'post',
     data: info
   })
@@ -21,7 +21,7 @@ export const addGoodsInfo = (info) => {
 // 修改商品信息
 export const modifyGoodsInfo = (info) => {
   return axios.request({
-    url: 'v1/goods/update',
+    url: 'goods/update',
     method: 'post',
     data: info
   })
@@ -30,7 +30,7 @@ export const modifyGoodsInfo = (info) => {
 // 类别列表
 export const getCategoryList = (data) => {
   return axios.request({
-    url: 'v1/category/list',
+    url: 'category/list',
     method: 'get',
     params: data
   })
@@ -39,7 +39,7 @@ export const getCategoryList = (data) => {
 // 添加列表
 export const addCategory = (info) => {
   return axios.request({
-    url: 'v1/category/create',
+    url: 'category/create',
     method: 'post',
     data: info
   })
@@ -48,7 +48,7 @@ export const addCategory = (info) => {
 // 修改类别
 export const modifyCategory = (info) => {
   return axios.request({
-    url: 'v1/category/update',
+    url: 'category/update',
     method: 'post',
     data: info
   })
@@ -57,7 +57,7 @@ export const modifyCategory = (info) => {
 // 类别suggest
 export const suggestCategory = (info) => {
   return axios.request({
-    url: 'v1/category/suggest',
+    url: 'category/suggest',
     method: 'post',
     data: info
   })
@@ -66,7 +66,7 @@ export const suggestCategory = (info) => {
 // 商品名称suggest
 export const suggestGoods = (info) => {
   return axios.request({
-    url: 'v1/goods/suggest',
+    url: 'goods/suggest',
     method: 'post',
     data: info
   })
@@ -80,7 +80,7 @@ export const suggestGoods = (info) => {
 const parFilter = function (obj) {
   if (obj) {
     Object.keys(obj).forEach(function (o) {
-      if (obj[o] === '' || obj[o] === undefined || obj[o] === null || obj[o] === 0) {
+      if (obj[o] === '' || obj[o] === undefined || obj[o] === null || obj[o] === 0 || obj[o] === []) {
         delete obj[o]
       }
     })
