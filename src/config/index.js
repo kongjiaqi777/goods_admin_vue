@@ -19,7 +19,7 @@ export default {
   baseUrl: {
     // dev: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/',
     dev: 'http://homestead.test',
-    pro: 'http://api.kongry.top:8083'
+    pro: 'http://www.kongry.top/v1'
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home
