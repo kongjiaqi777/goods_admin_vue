@@ -8,8 +8,8 @@
           </Form-item>
 
           <!-- 创建时间 -->
-          <Form-item prop="created_at" label="创建时间">
-            <Date-picker type="daterange" v-model="orderParam.created_at" placement="bottom-end" placeholder="选择日期" style="width: 200px"></Date-picker>
+          <Form-item prop="order_date" label="创建时间">
+            <Date-picker type="daterange" v-model="orderParam.order_date" placement="bottom-end" placeholder="选择日期" style="width: 200px"></Date-picker>
           </Form-item>
 
           <i-button @click="handleReset" size="default" style="float: right">重置</i-button>
@@ -49,7 +49,7 @@
             <i-input type="text" v-model="addSalesOrderForm.total_price_display" disabled></i-input>
           </Form-item>
           <Form-item label="折扣金额" prop="discount">
-            <i-input type="text" v-model="addSalesOrderForm.discount" disabled></i-input>
+            <i-input type="text" v-model="addSalesOrderForm.discount"></i-input>
           </Form-item>
           <Form-item label="付款方式" prop="pay_way">
             <RadioGroup v-model="addSalesOrderForm.pay_way">
@@ -68,8 +68,11 @@
           <Form-item label="已付金额" prop="pay_number">
             <i-input type="text" v-model="addSalesOrderForm.pay_number" onblur="calDiscount"></i-input>
           </Form-item>
-          <Form-item label="凭证" prop="photo">
+          <!-- <Form-item label="凭证" prop="photo">
             <i-input type="text" v-model="addSalesOrderForm.photo"></i-input>
+          </Form-item> -->
+          <Form-item label="订单日期" prop="order_date">
+            <DatePicker type="date" v-model="addSalesOrderForm.order_date"></DatePicker>
           </Form-item>
           <Form-item label="备注信息" prop="comment">
             <i-input type="text" v-model="addSalesOrderForm.comment"></i-input>
@@ -148,7 +151,7 @@ export default {
         { title: '顾客姓名', key: 'customer_name' },
         // { title: '凭证', key: 'photo' },
         { title: '备注信息', key: 'comment' },
-        { title: '添加时间', key: 'created_at' },
+        { title: '订单时间', key: 'order_date' },
         {
           title: '详情',
           key: 'handle',
@@ -228,9 +231,10 @@ export default {
         is_pay_off: 1, // 是否全部付款
         pay_number: 0, // 付款金额
         total_price: 0,
-        photo: '',
+        // photo: '',
         comment: '',
-        total_price_display: 0
+        total_price_display: 0,
+        order_date: new Date()
       },
       // 添加订单验证
       addSalesOrderRules: {
@@ -245,9 +249,6 @@ export default {
         ],
         is_pay_off: [
           { required: true, message: '请选择是否全部付款' }
-        ],
-        pay_number: [
-          { required: true, message: '请填写实际付款金额', trigger: 'blur' }
         ]
       },
       // 顾客列表数据
@@ -292,7 +293,7 @@ export default {
                         return x
                       }
                     })
-                    this.saleRecord[params.index].unit = obj.unit
+                    this.saleRecord[params.index].unit_id = obj.unit_id
                     this.saleRecord[params.index].sales_price = obj.sale_price
                     this.saleRecord[params.index].sales_price_display = util.montyFormatterOutput(obj.sale_price)
                     this.calPrice()
@@ -332,14 +333,14 @@ export default {
         },
         {
           title: '单位',
-          key: 'unit',
+          key: 'unit_id',
           width: 150,
           align: 'center',
           render: (h, params) => {
             return h('Select',
               {
                 props: {
-                  value: this.saleRecord[params.index].unit, // 数据的双向绑定 data是定义好的数据
+                  value: this.saleRecord[params.index].unit_id, // 数据的双向绑定 data是定义好的数据
                   transfer: true
                 },
                 on: {
@@ -461,7 +462,7 @@ export default {
         page: 1,
         perpage: 10,
         customer_name: '',
-        created_at: ''
+        order_date: ''
       },
       // 单位列表
       unitList: []
@@ -494,11 +495,6 @@ export default {
         console.log(err)
       })
     },
-    gotoAddPage () {
-      this.$router.push({
-        path: '/add_sales_order'
-      })
-    },
     // 获取客户列表
     getCustomerInfo () {
       getCustomerInfo().then(res => {
@@ -518,6 +514,7 @@ export default {
     // 添加订单
     AddOrder () {
       // 先验证saleRecord
+      this.getNowDate()
       this.$refs.addSalesOrder.validate((valid) => {
         if (valid) {
           this.validateRecordArray()
@@ -540,13 +537,11 @@ export default {
     },
     // 计算总价
     calPrice () {
-      console.log(this.saleRecord)
       this.addSalesOrderForm.total_price_display = 0
       this.addSalesOrderForm.total_price = 0
       this.saleRecord.forEach((item) => {
         this.addSalesOrderForm.pay_number = util.moneyFormatterInput(this.addSalesOrderForm.pay_number)
         this.addSalesOrderForm.discount = util.moneyFormatterInput(this.addSalesOrderForm.discount)
-        // console.log(parseInt(item.num) * parseInt(item.sales_price))
         this.addSalesOrderForm.total_price_display += parseInt(item.num) * parseInt(item.sales_price_display)
         this.addSalesOrderForm.total_price = util.moneyFormatterInput(this.addSalesOrderForm.total_price_display)
       })
@@ -576,9 +571,10 @@ export default {
       this.addSalesOrderForm.is_pay_off = 0
       this.addSalesOrderForm.pay_number = 0
       this.addSalesOrderForm.total_price = 0
-      this.addSalesOrderForm.photo = ''
+      // this.addSalesOrderForm.photo = ''
       this.addSalesOrderForm.comment = ''
       this.addSalesOrderForm.total_price_display = 0
+      this.addSalesOrderForm.order_date = new Date()
       this.saleRecord = [
         {
           goods_id: 0,
@@ -616,8 +612,9 @@ export default {
       this.addSalesOrderForm.pay_number = util.montyFormatterOutput(rowData.pay_number)
       this.addSalesOrderForm.total_price = rowData.total_price
       this.addSalesOrderForm.total_price_display = util.montyFormatterOutput(rowData.total_price)
-      this.addSalesOrderForm.photo = rowData.photo
+      // this.addSalesOrderForm.photo = rowData.photo
       this.addSalesOrderForm.comment = rowData.comment
+      this.addSalesOrderForm.order_date = rowData.order_date
       this.modelType = 2
       this.modelTitle = '修改订单信息'
       this.showUpdateDetail = true
@@ -653,7 +650,21 @@ export default {
       this.orderParam.page = 1
       this.orderParam.perpage = 10
       this.orderParam.customer_name = ''
-      this.orderParam.created_at = ''
+      this.orderParam.order_date = ''
+    },
+    getNowDate () {
+      let date = new Date()
+      let seperator1 = '-'
+      let year = date.getFullYear()
+      let month = date.getMonth() + 1
+      let strDate = date.getDate()
+      if (month >= 1 && month <= 9) {
+        month = '0' + month
+      }
+      if (strDate >= 0 && strDate <= 9) {
+        strDate = '0' + strDate
+      }
+      this.addSalesOrderForm.order_date = year + seperator1 + month + seperator1 + strDate
     }
   }
 }
