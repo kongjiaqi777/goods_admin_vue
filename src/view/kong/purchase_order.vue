@@ -427,7 +427,7 @@ export default {
     // 获取采购订单中的商品记录
     getPurchaseRecordItem: function (order_code) {
       getPurchaseRecord({ 'purchase_order_code': order_code }).then(res => {
-        this.purchaseRecordData = res.data.info
+        this.purchaseRecordData = res.data.info.list
       }).catch(err => {
         console.log(err)
       })
